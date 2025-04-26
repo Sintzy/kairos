@@ -10,7 +10,7 @@ Perfect for mounting on a screen inside any vehicle and keeping passengers infor
 
 
 ## 💡 Information
-> This is **not** a production-ready application. It is a proof of concept and should not be used in production without proper testing and security measures. This is also not a plug-and-play solution. You will need to modify the code to fit your needs and environment.
+> This is **not** a production-ready application. It is an application made for a very specific purpose. This is also not a plug-and-play solution. You will need to modify the code to fit your needs and environment.
 
 > You will need to develop a solution to update your current location. This can be done using a GPS module or a mobile device with GPS capabilities. You will also need to develop a solution to send the current location to the server. This can be done using a mobile app or a web app.
 
