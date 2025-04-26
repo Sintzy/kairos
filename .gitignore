@@ -1,10 +1,11 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
+DISCORDBOT.zip
 # dependencies
 /node_modules
 /DISCORDBOT/node_modules
 /DISCORDBOT/.env
-/DISCORDBOT/package-lock.json
+/DISCORDBOT/package-lock.json~
+/DISCORDBOT/discloud.config
 /.idea
 /.pnp
 .pnp.*
@@ -47,3 +48,4 @@ next-env.d.ts
 comoobterinfospotify.md
 
 .vercel
+DISCORDBOT/package-lock.json

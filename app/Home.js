@@ -45,8 +45,8 @@ export default function Home() {
             try {
                 // fallback para Lisboa se sem coords
                 if (!lat || !lng) {
-                    lat = 38.7071;
-                    lng = -9.13549;
+                    lat = 38.72393999495067,
+                    lng = -9.235054329040397;
                 }
 
                 const meteoRes = await fetch(`/api/metereologia?lat=${lat}&lng=${lng}`);
