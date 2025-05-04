@@ -37,6 +37,7 @@ async function expandLink(shortUrl) {
         description: `A expandir o link: ${shortUrl}`,
         icon: '📍',
     });
+    console.log(`A expandir o link: ${shortUrl}`);
     return new Promise((resolve, reject) => {
         https.get(shortUrl, (res) => {
             const status = res.statusCode;
@@ -51,6 +52,7 @@ async function expandLink(shortUrl) {
                     description: `O link não redirecionou ${status}`,
                     icon: '🚫',
                 });
+                console.log(`O link não redirecionou: ${status}`);
             }
         }).on('error', (err) => {
             reject(err);
@@ -58,6 +60,16 @@ async function expandLink(shortUrl) {
     });
 }
 
+client.on('messageCreate', async (message) => {
+    if (message.content.toLowerCase() === `<@${client.user.id}>` || message.content.toLowerCase() === 'ajuda') {
+        const embed = new EmbedBuilder()
+            .setTitle('🚌 Ajuda')
+            .setDescription('**Para iniciar uma viagem, envia um link do Google Maps com a origem e o destino.**\n\n' +
+                '**Para terminar uma viagem, envia "terminar".**')
+            .setColor('Green');
+        await message.reply({ embeds: [embed] });
+    }
+})
 client.on('messageCreate', async (message) => {
     if (message.author.bot) return;
     if (message.content.toLowerCase() === 'terminar') {
@@ -69,6 +81,7 @@ client.on('messageCreate', async (message) => {
                 description: `Viagem terminada com sucesso: ` + JSON.stringify(response.data, null, 2),
                 icon: '📍',
             });
+            console.log(`Viagem terminada com sucesso: ` + JSON.stringify(response.data, null, 2));
             message.reply('> **[📍] Viagem terminada com sucesso!**');
         } catch (error) {
             logsnag.track({
@@ -77,6 +90,7 @@ client.on('messageCreate', async (message) => {
                 description: `Ocorreu um erro ao terminar a viagem ${error}`,
                 icon: '🚫',
             });
+            console.log(`Ocorreu um erro ao terminar a viagem: ${error}`);
             message.reply('> **[🚫] Ocorreu um erro ao tentar terminar a viagem.**');
         }
         return;
@@ -112,6 +126,7 @@ client.on('messageCreate', async (message) => {
                 description: `O link enviado nao tem as informacoes corretas... ${response.data}`,
                 icon: '🚫',
             });
+            console.log(`O link enviado nao tem as informacoes corretas... ${response.data}`);
             return message.reply(
                 '> **[⚠️] O link nao tem as informacoes corretas... Tens que colocar para calcular a viagem. Só ai é que partilhas o link.**'
             );
@@ -124,6 +139,7 @@ client.on('messageCreate', async (message) => {
                 description: `A viagem não tem uma origem ou um destino ${response.data}`,
                 icon: '🚫',
             });
+            console.log(`A viagem não tem uma origem ou um destino ${response.data}`);
             return message.reply('> **[🚫] A viagem não tem uma origem ou um destino.**');
         }
 
@@ -145,6 +161,7 @@ client.on('messageCreate', async (message) => {
             description: `A viagem foi iniciada ${decodeURIComponent(origin)} para ${decodeURIComponent(destination)}`,
             icon: '💡',
         });
+        console.log(`A viagem foi iniciada ${decodeURIComponent(origin)} para ${decodeURIComponent(destination)}`);
 
     } catch (error) {
         logsnag.track({
@@ -153,6 +170,7 @@ client.on('messageCreate', async (message) => {
             description: `Ocorreu um erro: `+error,
             icon: '🚫',
         });
+        console.log(`Ocorreu um erro: ${error}`);
     }
 });
 
